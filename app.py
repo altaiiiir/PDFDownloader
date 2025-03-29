@@ -6,6 +6,11 @@ app = Flask(__name__)
 app.secret_key = "your-secret-key"  # Needed for flashing messages
 
 
+@app.route("/ads.txt")
+def ads_txt():
+    return send_file("ads.txt", mimetype="text/plain")
+
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     pdf_data = None
