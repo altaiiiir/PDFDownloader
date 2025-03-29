@@ -1,0 +1,25 @@
+/* Input styling */
+.stTextInput input {
+    background-color: #fff;
+    color: #000;
+}
+
+/* Centered buttons */
+.stButton > button,
+.stDownloadButton > button {
+    display: block;
+    margin: 0.75rem auto 0; /* tighter spacing */
+    width: 200px;
+    font-weight: bold;
+    color: white;
+    border-radius: 8px;
+}
+
+.stButton > button {
+    background-color: #4CAF50;
+}
+
+.stDownloadButton {
+    display: flex;
+    justify-content: center;
+}
