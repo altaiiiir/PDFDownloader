@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Instant PDF Downloader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Insert your Google AdSense code below if you have one -->
+</head>
+<body>
+    <div class="container">
+        <h1>📄 Instant PDF Downloader</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="messages">
+                {% for category, msg in messages %}
+                    <li class="{{ category }}">{{ msg }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <input type="text" name="url" placeholder="Paste a direct .pdf URL:" required>
+            <button type="submit">Download PDF</button>
+        </form>
+    </div>
+</body>
+</html>

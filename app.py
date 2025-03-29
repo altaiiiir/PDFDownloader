@@ -1,28 +1,32 @@
-import streamlit as st
+from flask import Flask, render_template, request, send_file, flash
 import requests
 from io import BytesIO
 
-st.set_page_config(page_title="PDF Downloader", layout="centered")
+app = Flask(__name__)
+app.secret_key = "your-secret-key"  # Needed for flashing messages
 
-with open("styles/styles.css") as f:
-    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-st.title("📄 Instant PDF Downloader")
+@app.route("/", methods=["GET", "POST"])
+def index():
+    pdf_data = None
 
-url = st.text_input("Paste a direct .pdf URL:")
-pdf_data = None
-
-if st.button("Load PDF") and url:
-    try:
-        response = requests.get(url)
-        if response.status_code == 200 and "application/pdf" in response.headers.get("Content-Type", ""):
-            pdf_data = BytesIO(response.content)
+    if request.method == "POST":
+        url = request.form.get("url", "").strip()
+        if not url:
+            flash("Please enter a URL.", "warning")
         else:
-            st.error("❌ PDF is not compatible or the link is invalid.")
-    except Exception as e:
-        st.error(f"Error downloading PDF: {e}")
-elif not url:
-    st.warning("Please enter a URL.")
+            try:
+                response = requests.get(url)
+                if response.status_code == 200 and "application/pdf" in response.headers.get("Content-Type", ""):
+                    pdf_data = BytesIO(response.content)
+                    return send_file(pdf_data, as_attachment=True, download_name="downloaded.pdf")
+                else:
+                    flash("❌ PDF is not compatible or the link is invalid.", "error")
+            except Exception as e:
+                flash(f"Error downloading PDF: {str(e)}", "error")
 
-if pdf_data:
-    st.download_button("📥", data=pdf_data, file_name="downloaded.pdf", mime="application/pdf", help="Download PDF")
+    return render_template("index.html")
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
