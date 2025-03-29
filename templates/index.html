@@ -9,25 +9,31 @@
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1113629789373902"
      crossorigin="anonymous"></script>
+
+    <!-- Icon Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 <body>
-    <div class="container">
-        <h1>📄 Instant PDF Downloader</h1>
+    <main class="glass-container">
+        <div class="container">
+            <h1>📄 Instant PDF Downloader</h1>
 
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <ul class="messages">
-                {% for category, msg in messages %}
-                    <li class="{{ category }}">{{ msg }}</li>
-                {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class="messages">
+                    {% for category, msg in messages %}
+                        <li class="{{ category }}">{{ msg }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
 
-        <form method="POST">
-            <input type="text" name="url" placeholder="Paste a direct .pdf URL:" required>
-            <button type="submit">Download PDF</button>
-        </form>
-    </div>
+            <form method="POST">
+                <input type="text" name="url" placeholder="Paste a direct .pdf URL:" required>
+                <button type="submit">Download PDF</button>
+            </form>
+        </div>
+    </main>
 </body>
 </html>

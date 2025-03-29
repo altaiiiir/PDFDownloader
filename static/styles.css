@@ -1,9 +1,18 @@
 body {
+    position: relative;
     font-family: sans-serif;
-    background-color: #fefae0;
-    color: #31333F;
+    background-color: #1e1e1e;
+    background-image:
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.07) 0%, transparent 70%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.06) 0%, transparent 70%),
+        url("https://www.transparenttextures.com/patterns/wavecut.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #f5f5f5;
     text-align: center;
     padding-top: 2rem;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
@@ -18,10 +27,13 @@ input[type="text"] {
     font-size: 16px;
     margin-bottom: 1rem;
     box-sizing: border-box;
+    background-color: #333;
+    color: white;
+    border: 1px solid #555;
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #4CAF50; /* flatter green */
     color: white;
     font-weight: bold;
     border: none;
@@ -32,6 +44,7 @@ button {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+    transition: background-color 0.3s;
 }
 
 .messages {
@@ -45,4 +58,15 @@ button {
 
 .messages .warning {
     color: orange;
+}
+
+.glass-container {
+    background-color: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 2rem;
+    border-radius: 16px;
+    max-width: 500px;
+    margin: auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
 }
