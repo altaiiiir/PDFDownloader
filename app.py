@@ -9,7 +9,17 @@ app.secret_key = "your-secret-key"  # Needed for flashing messages
 
 @app.route("/ads.txt")
 def ads_txt():
-    return send_file("ads.txt", mimetype="text/plain")
+    return app.send_static_file("ads.txt")
+
+
+@app.route("/robots.txt")
+def robots():
+    return app.send_static_file("robots.txt")
+
+
+@app.route("/sitemap.xml")
+def sitemap():
+    return app.send_static_file("sitemap.xml")
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -30,7 +40,7 @@ def index():
             return redirect(url_for('index'))  # Stay on the same page
 
         try:
-            response = requests.get(url)
+            response = requests.get(url, timeout=5)
             if response.status_code == 200 and "application/pdf" in response.headers.get("Content-Type", ""):
                 pdf_data = BytesIO(response.content)
                 return send_file(pdf_data, as_attachment=True, download_name="downloaded.pdf")
